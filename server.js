@@ -21,10 +21,10 @@ module.exports = function(){
 	// Arquivo de configuracoes
   	// app.config 			= require('./config')();
 
-	//Teste
-	var teste = {};
-	teste.controllers = {};
-	teste.controllers.teste = require(__dirname + '/modules/teste/teste-controller.js')();
+	//Lights
+	var lights = {};
+	lights.controllers = {};
+	lights.controllers.power = require(__dirname + '/modules/lights/power-controller.js')();
 
 	//Middleware
 	// var middleware = {};
@@ -44,7 +44,7 @@ module.exports = function(){
 	var routes = {};
 	routes.routes = require(__dirname + '/routes/router.js')(app.express, routes);
 	routes.v1 = {};
-	routes.v1.teste = require(__dirname + '/routes/v1/teste.js')(teste);
+	routes.v1.lights = require(__dirname + '/routes/v1/lights.js')(lights);
 
 	return {
 		app: app,

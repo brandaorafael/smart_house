@@ -45,6 +45,8 @@ module.exports = function(){
 	routes.routes = require(__dirname + '/routes/router.js')(app.express, routes);
 	routes.v1 = {};
 	routes.v1.lights = require(__dirname + '/routes/v1/lights.js')(lights);
+	routes.view = {};
+	routes.view.view = require(__dirname + '/routes/views/views.js')(app.path);
 
 	return {
 		app: app,

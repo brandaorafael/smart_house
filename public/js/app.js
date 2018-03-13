@@ -1,11 +1,44 @@
 angular.module('SmartHouse', [])
 
-.controller("appController", ["$rootScope", "$http",  function($rootScope, $http){
+.controller("appController", ["$rootScope", "$http", "$scope",  function($rootScope, $http, $scope){
 	var appCtrl = this;
 
+	var ligado = true;
+
+	$scope.ligado = "LIGADO";
+
+	$http.get('/v1/env').success(function(data){
+		var socket = io.connect(data.url);
+
+		socket.on('lightsOnOff', function(lights){
+	    	ligado = !ligado;
+
+	    	ligar(ligado);
+
+	    	console.log($scope.ligado);
+	    });
+	});
+
+
     appCtrl.click = function(){
-        alert("Deu certo!!");
+        $http.post('/v1/lights').success(function(data){
+        	console.log("Request deu certo!");
+        });
     }
+
+    
+
+    var ligar = function(ligado){
+    	if(ligado){
+    		$scope.ligado = "LIGADO";
+    	} else {
+    		$scope.ligado = "DESLIGADO";
+    	}
+
+    	$scope.$apply();
+    }
+
+    console.log($scope.ligado);
 
 	// $rootScope.api = "http://localhost:3000/"
 

@@ -14,31 +14,11 @@ module.exports = function(){
 	app.bodyParser     	= require('body-parser');
 	//https://github.com/expressjs/method-override
 	app.methodOverride 	= require('method-override');
-	//https://lodash.com/
-	app._				= require('lodash');
-	//https://github.com/expressjs/multer
-	app.multer  		= require('multer');
-	// Arquivo de configuracoes
-  	// app.config 			= require('./config')();
 
 	//Lights
 	var lights = {};
 	lights.controllers = {};
 	lights.controllers.power = require(__dirname + '/modules/lights/power-controller.js')();
-
-	//Middleware
-	// var middleware = {};
-	// var storage = app.multer.diskStorage({
-	//   destination: function (req, file, cb) {
-	//     cb(null, __dirname + '/public/images/produto/')
-	//   },
-	//   filename: function (req, file, cb) {
-	//     app.crypto.pseudoRandomBytes(16, function (err, raw) {
-	//       cb(null, raw.toString('hex') + app.path.extname(file.originalname));
-	//     });
-	//   }
-	// });
-	// middleware.upload = app.multer({ storage: storage });
 
 	//Rotas
 	var routes = {};
